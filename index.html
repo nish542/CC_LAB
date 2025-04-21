@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SOAP Hello UI</title>
+</head>
+<body>
+  <h2>Say Hello (SOAP Client)</h2>
+  <input type="text" id="nameInput" placeholder="Enter your name" />
+  <button onclick="callSayHello()">Say Hello</button>
+
+  <h3>Response:</h3>
+  <pre id="responseBox">Waiting for response...</pre>
+
+  <script>
+    async function callSayHello() {
+      const name = document.getElementById("nameInput").value;
+      const url = "http://localhost:8000/wsdl";
+
+      const soapEnvelope = `
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                          xmlns:hel="http://example.com/hello">
+          <soapenv:Header/>
+          <soapenv:Body>
+            <hel:sayHello>
+              <name>${name}</name>
+            </hel:sayHello>
+          </soapenv:Body>
+        </soapenv:Envelope>
+      `;
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/xml;charset=UTF-8",
+            "SOAPAction": "sayHello"
+          },
+          body: soapEnvelope
+        });
+
+        const text = await res.text();
+        console.log("Raw SOAP Response:", text);
+
+        // Extract <greeting> from the response using RegEx
+        const match = text.match(/<greeting>(.*)<\/greeting>/);
+        const greeting = match ? match[1] : "No greeting found";
+
+        document.getElementById("responseBox").textContent = greeting;
+
+      } catch (error) {
+        document.getElementById("responseBox").textContent = "Error: " + error;
+      }
+    }
+  </script>
+</body>
+</html>
