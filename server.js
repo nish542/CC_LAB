@@ -4,7 +4,7 @@ const soap = require('strong-soap').soap;
 const path = require('path');
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // 1. Define SOAP methods
 const service = {
