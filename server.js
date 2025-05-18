@@ -35,11 +35,6 @@ const http = require('http');
 const server = http.createServer(app);
 
 
-// test api
-app.get('/api/test', async (req, res) => {
-  res.send('Hello World!');
-})
-
 app.get('/ui', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
