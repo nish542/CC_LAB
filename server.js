@@ -6,6 +6,13 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const corsOptions = {
+  origin: 'https://soap-web-service-hdc0a4gxhncndwfc.centralus-01.azurewebsites.net',
+};
+
+app.use(express.json());
+app.use(cors(corsOptions));
+
 // 1. Define SOAP methods
 const service = {
   HelloService: {
@@ -26,6 +33,12 @@ const wsdl = fs.readFileSync('service.wsdl', 'utf8');
 // 3. Create HTTP server manually
 const http = require('http');
 const server = http.createServer(app);
+
+
+// test api
+app.get('/api/test', async (req, res) => {
+  res.send('Hello World!');
+})
 
 app.get('/ui', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
