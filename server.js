@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const soap = require('strong-soap').soap;
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
