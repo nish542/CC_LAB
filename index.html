@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SOAP Hello UI</title>
+  <title>Hiee..</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f7fa;
+      background: linear-gradient(135deg, #56669a 0%, #f5f7fa 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,62 +17,103 @@
 
     .container {
       background: white;
-      padding: 30px 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 36px 44px 32px 44px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
       text-align: center;
-      width: 90%;
-      max-width: 400px;
+      width: 95%;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #007bff;
+      background: #e7f1ff;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.08);
     }
 
     h2 {
-      margin-bottom: 20px;
-      color: #333;
+      margin-bottom: 18px;
+      color: #222;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      margin-bottom: 15px;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1.5px solid #b3c6e0;
+      font-size: 17px;
+      margin-bottom: 18px;
       box-sizing: border-box;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus {
+      border: 1.5px solid #007bff;
+      background: #f4faff;
     }
 
     button {
-      background: #007bff;
+      background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
       color: white;
-      padding: 12px 20px;
+      padding: 13px 0;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s ease;
+      font-size: 17px;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 10px;
+      transition: background 0.3s;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.08);
     }
 
     button:hover {
-      background: #0056b3;
+      background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+    }
+
+    h3 {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      color: #444;
+      font-size: 18px;
+      font-weight: 500;
     }
 
     pre {
-      background: #f0f0f0;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      font-size: 16px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+      background: #f8faff;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 0;
+      font-size: 17px;
+      color: #1a237e;
+      min-height: 32px;
+      border: 1px solid #e3eafc;
+      box-shadow: 0 1px 4px rgba(0,123,255,0.04);
+      text-align: left;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>👋 Say Hello</h2>
+    <div class="icon">👋</div>
+    <h2>Say Hello</h2>
     <input type="text" id="nameInput" placeholder="Enter your name" />
     <button onclick="callSayHello()">Say Hello</button>
 
-    <h3>Response:</h3>
+    <h3>Response</h3>
     <pre id="responseBox">Waiting for response...</pre>
   </div>
 
@@ -92,6 +133,8 @@
           </soapenv:Body>
         </soapenv:Envelope>
       `;
+
+      document.getElementById("responseBox").textContent = "Loading...";
 
       try {
         const res = await fetch(url, {
