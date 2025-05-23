@@ -36,7 +36,7 @@
 
   <service name="HelloService">
     <port name="HelloPort" binding="tns:HelloBinding">
-      <soap:address location="https://soap-web-service-hdc0a4gxhncndwfc.centralus-01.azurewebsites.net/wsdl"/>
+      <soap:address location="http://localhost:8000/wsdl"/>
     </port>
   </service>
 </definitions>

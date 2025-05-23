@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: 'https://soap-web-service-hdc0a4gxhncndwfc.centralus-01.azurewebsites.net',
+  origin: 'http://localhost:8000',
 };
 
 app.use(express.json());
